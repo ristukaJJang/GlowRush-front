@@ -1,0 +1,196 @@
+#login {
+  flex-direction: row;
+  overflow-y: hidden;
+  display: flex;
+  align-items: center; /* 세로 중앙 정렬 (필요 없으면 삭제 가능) */
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  
+}
+
+#login .login-img {
+    width: 900px;
+    height: 100vh;
+    background-repeat: no-repeat;
+}
+
+#login .login-input {
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+#login .growrush {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 80px;
+  align-items: center; /* ✅ 추가 */
+  justify-content: center;
+}
+
+
+#login .gr-img {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+#login .gr-text {
+  font-size: 30px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#login .title {
+  margin-bottom: 50px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+#login .input-id {
+  width: 300px;
+  height: 25px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+}
+
+#login .input-pw {
+  width: 300px;
+  height: 25px;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 50px;
+  border: 1px solid lightgray;
+}
+
+/* #login .message {
+  font-size: 12px;
+  color: red;
+  margin-left: -150px;
+  margin-top: 3px;
+  visibility: hidden;
+} */
+
+#login .login-btn {
+  width: 300px;
+  height: 25px;
+  padding: 10px;
+
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+
+  cursor: pointer;
+}
+
+#login .login-btn-k {
+  width: 300px;
+  height: 25px;
+  padding: 10px;
+
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+  background-color: #fbe300;
+  color: black;
+
+  cursor: pointer;
+}
+
+#login .login-btn-n {
+  width: 300px;
+  height: 25px;
+  padding: 10px;
+
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+  background-color: #2db400;
+  color: white;
+
+  cursor: pointer;
+}
+
+#login .sns-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#login .sns-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+#login .sns-login .sns-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 18px;
+}
+
+#login .sns-img {
+  width: 40px;
+  height: 40px;
+}
+
+#login .join {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+#login .join-text {
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#login .join-btn {
+  width: 130px;
+  height: 25px;
+  padding: 10px;
+
+  font-size: 15px;
+  font-weight: 600;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+
+  cursor: pointer;
+}
