@@ -68,7 +68,9 @@ const goToLogin = () => {
   if (!birth.value || birth.value.length !== 8) return alert('생년월일을 8자리로 입력해주세요.');
   if (!gender.value) return alert('성별을 선택해주세요.');
 
-  router.push('/login');
+  alert('회원가입이 완료되었습니다.');
+
+  router.push('/');
 }
 </script>
 

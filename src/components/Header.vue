@@ -1,11 +1,10 @@
 <script setup>
-import "../styles/header.css";
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
 const gotoHome = () => {
-  router.push('/home')
+  router.push('/main')
 }
 
 const gotoMypage = () => {
@@ -18,7 +17,7 @@ const logout = () => {
   // localStorage.removeItem('token')  <-- 이런 식으로 실제 로직을 나중에 넣을 수 있음
 
   // 로그인 페이지로 이동
-  router.push('/login')
+  router.push('/')
 }
 </script>
 
@@ -32,3 +31,29 @@ const logout = () => {
     </nav>
   </header>
 </template>
+
+<style>
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: #fff;
+
+}
+.logo {
+  font-weight: bold;
+  font-size: 2rem;
+  color: #000000;
+}
+.nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+}
+.nav a:hover {
+  color: #ff6699;
+}
+</style>

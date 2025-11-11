@@ -16,7 +16,7 @@ const password = ref('')
 
 const goToLogin = () => {
   if (id.value === exampleId && password.value === examplePw) {
-    router.push('/home');
+    router.push('/main');
   } else {
     alert('아이디/비밀번호가 틀렸거나 존재하지 않는 정보입니다.');
   }

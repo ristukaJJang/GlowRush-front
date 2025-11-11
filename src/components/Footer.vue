@@ -15,9 +15,6 @@
   </footer>
 </template>
 
-<script setup>
-</script>
-
 <style scoped>
 .footer {
   background-color: #111;
@@ -25,6 +22,7 @@
   text-align: center;
   padding: 20px 0;
   font-size: 14px;
+  margin-top: 30px;
 }
 
 .footer-content {
