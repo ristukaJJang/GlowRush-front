@@ -1,12 +1,14 @@
 <script setup>
 import { ref, computed } from 'vue'
-import PaymentCard from '../../components/PaymentCard.vue'
+import CouponCard from '../../../components/CouponCard.vue';
 
-const payments = [
-  { method: "신용카드", amount: "35000", date: "2026-01-10 15:28", status: "done" },
-  { method: "카카오페이", amount: "35000", date: "2026-01-10 17:25", status: "done" },
-  { method: "무통장입금", amount: "35000", date: "2026-01-10 01:01", status: "cancle" },
+const coupons = [
+  { title: "10% 할인 쿠폰", description: "GlowRush 전 제품 적용", expire: "2026-01-10", status: "available" },
+  { title: "배송비 무료 쿠폰", description: "1회 제한", expire: "2026-02-01", status: "available" },
+  { title: "5,000원 할인 쿠폰", description: "3만원 이상 구매", expire: "2025-12-31", status: "used" },
 ]
+
+const availableCoupons = coupons.filter(c => c.status === "available");
 
 /* ---- 페이지네이션 ---- */
 
@@ -17,7 +19,7 @@ const currentPage = ref(1)
 const perPage = 6
 
 // 총 페이지 수
-const totalPages = computed(() => Math.ceil(payments.length / perPage))
+const totalPages = computed(() => Math.ceil(coupons.length / perPage))
 
 // 페이지네이션 블록 (5개씩 묶음)
 const pageBlock = 5
@@ -52,9 +54,9 @@ const nextBlock = () => {
 }
 
 // 현재 페이지의 쿠폰
-const paginatedPayments = computed(() => {
+const paginatedCoupons = computed(() => {
   const start = (currentPage.value - 1) * perPage
-  return payments.slice(start, start + perPage)
+  return coupons.slice(start, start + perPage)
 })
 
 // 페이지 이동
@@ -66,23 +68,14 @@ const goPage = (page) => {
 
 <template>
   <div class="coupon-list">
-    <!-- <CouponCard
-      v-for="(item, i) in paginatedCoupons"
+    <CouponCard
+      v-for="(item, i) in availableCoupons"
       :key="i"
       :title="item.title"
       :description="item.description"
       :expire="item.expire"
       :status="item.status"
-    /> -->
-    <PaymentCard
-      v-for="(item, i) in paginatedPayments"
-      :key="i"
-      :method="item.method"
-      :amount="item.amount"
-      :date="item.date"
-      :status="item.status"
-/>
-
+    />
   </div>
 
   <!-- 페이지네이션 -->

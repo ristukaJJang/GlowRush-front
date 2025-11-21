@@ -74,7 +74,7 @@ const gotoCheck = () => {
     cursor: pointer;
 }
 
-#withdraw .ok-btn:hover {
+/* #withdraw .ok-btn:hover {
     background-color: lightgray;
     color: black;
     border: 1px solid lightgray;
@@ -92,5 +92,5 @@ const gotoCheck = () => {
     justify-content: center;
     display: flex;
     cursor: pointer;
-}
+} */
 </style>

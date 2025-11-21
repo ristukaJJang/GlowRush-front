@@ -4,9 +4,12 @@ import Join from '../pages/Join.vue'
 import Main from '../pages/Main.vue'
 import Mypage from '../pages/mypage/Mypage.vue'
 import MyAccount from '../pages/mypage/MyAccount.vue'
-import Coupon from '../pages/mypage/Coupon.vue'
+import Coupon from '../pages/mypage/coupon/Coupon.vue'
 import Payment from '../pages/mypage/Payment.vue'
 import Withdraw from '../pages/mypage/Withdraw.vue'
+import UsedCoupon from '../pages/mypage/coupon/UsedCoupon.vue'
+import AvailableCoupon from '../pages/mypage/coupon/AvailableCoupon.vue'
+import AllCoupon from '../pages/mypage/coupon/AllCoupon.vue'
 
 const routes = [
   { path: '/', component: Login },
@@ -17,7 +20,16 @@ const routes = [
     component: Mypage, // 마이페이지 전체 레이아웃
     children: [
       { path: 'account', component: MyAccount },
-      { path: 'coupon', component: Coupon },
+      { 
+        path: 'coupon', 
+        component: Coupon, 
+        children: [
+          { path: 'all', component: AllCoupon },
+          { path: 'used', component: UsedCoupon },
+          { path: 'available', component: AvailableCoupon },
+          { path: '', redirect: '/mypage/coupon/all' } // 쿠폰 기본 화면
+        ]
+      },
       { path: 'payment', component: Payment },
       { path: 'withdraw', component: Withdraw },
       { path: '', redirect: '/mypage/account' } // 기본 화면
