@@ -1,43 +1,47 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-defineProps({
-  openDate: String,      // 오픈 일시
-  imgSrc: String,       // 이미지 링크
-  name: String,         // 쿠폰 이름
-  explain: String,      // 쿠폰 설명
-  expire: String        // 쿠폰 유효기간
+const props = defineProps({
+  id: Number,
+  openDate: String,
+  imgSrc: String,
+  name: String,
+  explain: String,
+  expire: String,
+  hideCountdown: Boolean // 오늘 마감용
 })
 
 const remainTime = ref('')
 
-// 남은 시간 계산 함수
+// "2025-11-21 18시" 같은 문자열을 Date 객체로 변환
+const parseDate = (str) => {
+  const [datePart, hourPart] = str.split(" ")
+  const hour = parseInt(hourPart.replace("시", ""))
+
+  const d = new Date(datePart)
+  d.setHours(hour, 0, 0, 0)
+  return d
+}
+
 const updateCountdown = () => {
   const now = new Date()
+  const target = parseDate(props.openDate)
 
-  // 오늘 날짜 가져오기
-  const target = new Date()
-  // 추후엔 opendate 맞춰서 하기
-  target.setHours(16, 0, 0, 0)  // 오늘 16:00:00
+  let diff = target - now
 
-  let diff = target - now  // 밀리초(ms) 차이
-
-  // 이미 시간이 지났다면 "00:00:00"
   if (diff <= 0) {
-    remainTime.value = "00:00:00"
+    remainTime.value = "오픈 완료"
     return
   }
 
-  // 밀리초 → 시/분/초 변환
-  const hours = Math.floor(diff / (1000 * 60 * 60))
-  diff %= (1000 * 60 * 60)
+  const hours = Math.floor(diff / 3600000)
+  diff %= 3600000
 
-  const minutes = Math.floor(diff / (1000 * 60))
-  diff %= (1000 * 60)
+  const minutes = Math.floor(diff / 60000)
+  diff %= 60000
 
   const seconds = Math.floor(diff / 1000)
 
-  // 두 자리로 맞추기
   const pad = (n) => (n < 10 ? "0" + n : n)
 
   remainTime.value = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
@@ -46,8 +50,8 @@ const updateCountdown = () => {
 let timer = null
 
 onMounted(() => {
-  updateCountdown() // 초기 실행
-  timer = setInterval(updateCountdown, 1000) // 1초마다 업데이트
+  updateCountdown()
+  timer = setInterval(updateCountdown, 1000)
 })
 
 onBeforeUnmount(() => {
@@ -56,13 +60,14 @@ onBeforeUnmount(() => {
 </script>
 
 
+
 <template>
     <div id="main-coupon">
-        <div class="remaining">{{ remainTime }}</div>
+        <div v-if="!hideCountdown && remainTime !== '오픈 완료'" class="remaining">{{ remainTime }}</div>
         <div class="info">
-          <div>{{ imgSrc }}</div>
+          <img :src="imgSrc" class="main-img" />
           <div>{{ name }}</div>
-          <div>{{  explain }}</div>
+          <div>{{ explain }}</div>
           <div>{{ expire }}</div>
         </div>
     </div>
@@ -99,7 +104,7 @@ onBeforeUnmount(() => {
     border: 2px solid black;
     border-radius: 7px;
     width: 90%;
-    height: 300px;
+    height: 350px;
     font-size: 20px;
     font-weight: 600;
     justify-content: center;
@@ -107,5 +112,12 @@ onBeforeUnmount(() => {
     padding: 10px;
     display: flex;
     flex-direction: column;
+}
+
+#main .main-img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 35px;
+    background-size: cover;
 }
 </style>

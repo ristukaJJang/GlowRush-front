@@ -20,7 +20,7 @@
     justify-content: center;
     border-radius: 7px;
     border: 2px solid black;
-    width: 50%;
+    width: 48.5%;
     height: 50px;
     padding: 10px;
     margin-top: -5px;
@@ -30,12 +30,35 @@
 
 #main .event-list {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-self: center;
     justify-self: center;
-    gap: 13px;
     margin-top: 80px;
     cursor: pointer;
     width: 50%;
     margin-bottom: 80px;
+}
+
+#main .event-props {
+    display: flex;
+    flex-direction: row;
+}
+
+#main .event-list.open-completed {
+    background-color: #f0f0f0;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 40px;
+    border-radius: 10px;
+}
+
+#main .page-btn {
+    background-color: white;
+    border: 0px;
+}
+
+#main .page-btn2 {
+    background-color: #f0f0f0;
+    border: 0px;
 }
