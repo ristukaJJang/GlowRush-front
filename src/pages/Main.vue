@@ -15,10 +15,24 @@ import img8 from '../assets/main8.jpg'
 import img9 from '../assets/main9.jpg'
 import img10 from '../assets/main10.jpg'
 
+import { useRouter } from 'vue-router'
+
+
+const router = useRouter()
+
+const alertNotopen = () => {
+  alert('아직 오픈되지 않았습니다.');
+}
+
+const movetoDetail = (id) => {
+  router.push(`/detail/${id}`);
+}
+
+
 const mainCoupons = [
   {  
     id: 1,
-    openDate: "2025-11-25 18시", 
+    openDate: "2025-11-30 18시", 
     imgSrc: img1, 
     name: "10% 할인 쿠폰", 
     explain: "GlowRush 전 제품 적용", 
@@ -26,7 +40,7 @@ const mainCoupons = [
   },
   { 
     id: 2,
-    openDate: "2025-11-25 19시", 
+    openDate: "2025-11-30 19시", 
     imgSrc: img2, 
     name: "배송비 무료 쿠폰", 
     explain: "1회 제한", 
@@ -34,7 +48,7 @@ const mainCoupons = [
   },
   { 
     id: 3,
-    openDate: "2025-11-25 20시", 
+    openDate: "2025-11-30 20시", 
     imgSrc: img3, 
     name: "5,000원 할인 쿠폰", 
     explain: "3만원 이상 구매", 
@@ -78,7 +92,7 @@ const mainCoupons = [
     imgSrc: img8, 
     name: "배송비 무료 쿠폰", 
     explain: "1회 제한", 
-    expire: "2025-11-25"
+    expire: "2025-11-30"
   },
   { 
     id: 9,
@@ -86,7 +100,7 @@ const mainCoupons = [
     imgSrc: img9, 
     name: "5,000원 할인 쿠폰", 
     explain: "3만원 이상 구매", 
-    expire: "2025-11-25"
+    expire: "2025-11-30"
   },
   { 
     id: 10,
@@ -94,7 +108,7 @@ const mainCoupons = [
     imgSrc: img10, 
     name: "5,000원 할인 쿠폰", 
     explain: "3만원 이상 구매", 
-    expire: "2025-11-25"
+    expire: "2025-11-30"
   }
 ]
 
@@ -120,8 +134,8 @@ const todayCoupons = computed(() => {
   return mainCoupons.filter(c => {
     const expire = new Date(c.expire + ' 23:59:59')
     return expire.getFullYear() === today.getFullYear() &&
-           expire.getMonth() === today.getMonth() &&
-           expire.getDate() === today.getDate()
+          expire.getMonth() === today.getMonth() &&
+          expire.getDate() === today.getDate()
   })
 })
 
@@ -214,6 +228,7 @@ onBeforeUnmount(() => {
               :name="item.name"
               :explain="item.explain"
               :expire="item.expire"
+              @click="alertNotopen"
             />
             <button @click="nextPage(1)" :disabled="currentPage1 === totalPages1" class="page-btn">▶</button>
           </div>
@@ -232,6 +247,7 @@ onBeforeUnmount(() => {
               :explain="item.explain"
               :expire="item.expire"
               :hide-countdown="true"
+              @click="movetoDetail(item.id)"
             />
             <button @click="nextPage(2)" :disabled="currentPage2 === totalPages2" class="page-btn2">▶</button>
           </div>
@@ -250,6 +266,7 @@ onBeforeUnmount(() => {
               :explain="item.explain"
               :expire="item.expire"
               :hide-countdown="true"
+              @click="movetoDetail(item.id)"
             />
             <button @click="nextPage(3)" :disabled="currentPage3 === totalPages3" class="page-btn">▶</button>
           </div>

@@ -11,6 +11,10 @@ const gotoMypage = () => {
   router.push('/mypage')
 }
 
+const gotoWating = () => {
+  router.push('/waiting')
+}
+
 // 로그아웃 함수
 const logout = () => {
   // 로그아웃 시 처리할 동작들 (예: 토큰 삭제 등)
@@ -23,9 +27,10 @@ const logout = () => {
 
 <template>
   <header class="header">
-    <h1 class="logo">💫 GlowRush</h1>
+    <h1 class="logo" @click="gotoHome">💫 GlowRush</h1>
     <nav class="nav">
       <a href="#" @click.prevent="gotoHome">홈</a>
+      
       <a href="#" @click.prevent="gotoMypage">마이페이지</a>
       <a href="#" @click.prevent="logout">로그아웃</a>
     </nav>
@@ -46,6 +51,7 @@ const logout = () => {
   font-weight: bold;
   font-size: 2rem;
   color: #000000;
+  cursor: pointer;
 }
 .nav a {
   margin-left: 20px;

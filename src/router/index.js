@@ -10,11 +10,14 @@ import Withdraw from '../pages/mypage/Withdraw.vue'
 import UsedCoupon from '../pages/mypage/coupon/UsedCoupon.vue'
 import AvailableCoupon from '../pages/mypage/coupon/AvailableCoupon.vue'
 import AllCoupon from '../pages/mypage/coupon/AllCoupon.vue'
+import Detail from '../pages/Detail.vue'
+import WaitingCard from '../components/WaitingCard.vue'
 
 const routes = [
   { path: '/', component: Login },
   { path: '/join', component: Join },
   { path: '/main', component: Main },
+  { path: '/detail/:id', component: Detail, props: true },
   {
     path: '/mypage',
     component: Mypage, // 마이페이지 전체 레이아웃
@@ -35,6 +38,7 @@ const routes = [
       { path: '', redirect: '/mypage/account' } // 기본 화면
     ]
   },
+  { path: '/waiting', component: WaitingCard }
 ]
 
 const router = createRouter({
