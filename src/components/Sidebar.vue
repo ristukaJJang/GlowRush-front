@@ -12,7 +12,7 @@ const go = (path) => {
   <div id="sidebar">
     <div class="menu" :class="{ active: route.path === '/mypage/account' }" @click="go('account')">개인정보 수정</div>
     <div class="menu" :class="{ active: route.path === '/mypage/coupon' }" @click="go('coupon')">쿠폰 관리</div>
-    <div class="menu" :class="{ active: route.path === '/mypage/payment' }" @click="go('payment')">결제 내역</div>
+    <!--<div class="menu" :class="{ active: route.path === '/mypage/payment' }" @click="go('payment')">결제 내역</div>-->
     <div class="menu" :class="{ active: route.path === '/mypage/withdraw' }" @click="go('withdraw')">회원 탈퇴</div>
   </div>
 </template>

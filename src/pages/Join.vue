@@ -2,7 +2,7 @@
 import "../styles/join.css";
 import join from '../assets/blackcushion.jpg';
 import star from '../assets/star.png';
-
+import axios from "axios";
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 
@@ -12,7 +12,6 @@ const name = ref('')
 
 const id = ref('');
 const idError = ref('');
-const exampleId = 'qwer1234'
 const isClicked = ref(false) // 아이디 중복 확인 버튼 클릭 여부
 const isIdValidate = ref(false) // 아이디 사용 가능 여부
 
@@ -29,12 +28,18 @@ const birthError = ref('')
 
 const gender = ref('')
 
-const validateId = () => {
+const validateId = async () => {
   isClicked.value = true;
   if(id.value === '') idError.value = '아이디를 입력해주세요.';
-  else if (exampleId === id.value) idError.value = '이미 존재하는 아이디입니다.';
-  else {
-    idError.value = '';
+
+  const res = await fetch(`http://localhost:3000/api/users/check-id/${id.value}`);
+  const data = await res.json();
+
+  if (data.exists) {
+    idError.value = "이미 존재하는 아이디입니다.";
+    isIdValidate.value = false;
+  } else {
+    idError.value = "";
     isIdValidate.value = true;
   }
 };
@@ -60,7 +65,7 @@ const validateBirth = () => {
   else birthError.value = '생년월일 8자리 입력해주세요.'
 }
 
-const goToLogin = () => {
+const goToLogin = async() => {
   if (!name.value) return alert('이름을 입력해주세요.');
   if (!isIdValidate.value) return alert('아이디 중복 확인을 해주세요.');
   if (!isPwRgxValidate.value) return alert('비밀번호 형식이 올바르지 않습니다.');
@@ -68,9 +73,28 @@ const goToLogin = () => {
   if (!birth.value || birth.value.length !== 8) return alert('생년월일을 8자리로 입력해주세요.');
   if (!gender.value) return alert('성별을 선택해주세요.');
 
-  alert('회원가입이 완료되었습니다.');
+  // 백엔드에 보낼 회원가입 데이터
+  const body = {
+    name: name.value,
+    user_id: id.value,
+    password: password.value,   // 백엔드에서 bcrypt로 암호화해줌!
+    birth: birth.value,
+    gender: gender.value
+  };
 
-  router.push('/');
+  try {
+    const res = await axios.post("http://localhost:3000/api/users/join", body, 
+    {headers: { "Content-Type": "application/json" }});
+
+    console.log(res.data);
+
+    alert("회원가입이 완료되었습니다!");
+    router.push('/');
+
+  } catch (error) {
+    console.error(error);
+    alert("서버 오류가 발생했습니다.");
+  }
 }
 </script>
 

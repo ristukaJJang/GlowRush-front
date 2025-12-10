@@ -4,23 +4,45 @@ import login from '../assets/blackcushion.jpg';
 import star from '../assets/star.png';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import axios from 'axios'
+
 
 const router = useRouter()
 
-const exampleId = 'qwer1234'
 const id = ref('')
-
-
-const examplePw = 'gloria010425'
 const password = ref('')
 
-const goToLogin = () => {
-  if (id.value === exampleId && password.value === examplePw) {
-    router.push('/main');
-  } else {
-    alert('아이디/비밀번호가 틀렸거나 존재하지 않는 정보입니다.');
+const goToLogin = async () => {
+  const body = {
+    user_id: id.value,
+    password: password.value
+  };
+
+  try {
+    const res = await axios.post(
+      "http://localhost:3000/api/users/login",
+      body,
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    const data = res.data;
+
+    // 로그인 성공
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+      router.push('/main');   // 원하는 곳으로 리다이렉트
+    }
+
+  } catch (error) {
+    // axios 오류 종류별로 처리
+    if (error.response) {
+      // 백엔드가 보낸 메시지 출력
+      alert(error.response.data.message);
+    } else {
+      alert("서버 연결 오류");
+    }
   }
-}
+};
 
 const goToSignup = () => {
   router.push('/join');

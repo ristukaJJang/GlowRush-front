@@ -1,5 +1,9 @@
 <script setup>
 import { useRouter } from 'vue-router'
+import axios from "axios";
+
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = "http://localhost:3000"; // 백엔드 주소
 
 const router = useRouter()
 
@@ -11,18 +15,19 @@ const gotoMypage = () => {
   router.push('/mypage')
 }
 
-const gotoWating = () => {
-  router.push('/waiting')
-}
-
 // 로그아웃 함수
-const logout = () => {
-  // 로그아웃 시 처리할 동작들 (예: 토큰 삭제 등)
-  // localStorage.removeItem('token')  <-- 이런 식으로 실제 로직을 나중에 넣을 수 있음
+const logout = async () => {
+  try {
+    await axios.post('http://localhost:3000/api/users/logout', {}, {
+      withCredentials: true,
+    });
+    router.push('/');
+  } catch (error) {
+    console.error(error);
+    alert("로그아웃 실패");
+  }
+};
 
-  // 로그인 페이지로 이동
-  router.push('/')
-}
 </script>
 
 <template>

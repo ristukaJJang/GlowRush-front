@@ -67,8 +67,8 @@ onBeforeUnmount(() => {
         <div class="info">
           <img :src="imgSrc" class="main-img" />
           <div>{{ name }}</div>
-          <div>{{ explain }}</div>
-          <div>{{ expire }}</div>
+          <div class="main-explain">{{ explain }}</div>
+          <div class="main-expire">{{ expire }}</div>
         </div>
     </div>
 </template>
@@ -119,5 +119,18 @@ onBeforeUnmount(() => {
     height: 200px;
     margin-bottom: 35px;
     background-size: cover;
+}
+
+#main .main-explain {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+#main .main-expire {
+  font-size: 12px;
+  margin-top: 10px;
+  font-weight: 500;
+  color: gray;
 }
 </style>
